@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Đám Cưới</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #d63384;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .event {
+            margin: 20px 0;
+        }
+        .event h2 {
+            color: #333;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .response-buttons {
+            margin-top: 20px;
+        }
+        .response-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .agree {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .disagree {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .undecided {
+            background-color: #ffc107;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function handleResponse(response) {
+            const guestName = "[Tên bạn]"; // Tên người nhận được lấy từ nội dung thư
+
+            fetch("https://script.google.com/macros/s/AKfycbz29UpzO4j21fu98Xrc_Bd4ebDGt7VH_pF9aWMKk8q6FWAq8elc-NxIW51HEO4GCPia/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: guestName,
+                    response: response
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert("Cảm ơn bạn đã phản hồi! Chúng mình đã ghi nhận thông tin.");
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.");
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Thiệp Mời Đám Cưới</h1>
+        <p>Thân gửi bạn <b>Quang</b>,</p>
+        <p>Chúng mình vô cùng hân hạnh mời bạn đến chung vui trong ngày trọng đại của chúng mình.</p>
+
+        <div class="event">
+            <h2>Tại Hà Nội</h2>
+            <p><b>Thời gian:</b> Ngày 07.03.2025, lúc [giờ tổ chức]</p>
+            <p><b>Địa điểm:</b> [Tên địa điểm, địa chỉ cụ thể]</p>
+        </div>
+
+        <div class=""event">
+            <h2>Tại Sài Gòn</h2>
+            <p><b>Thời gian:</b> Ngày 19.03.2025, lúc [giờ tổ chức]</p>
+            <p><b>Địa điểm:</b> [Tên địa điểm, địa chỉ cụ thể]</p>
+        </div>
+
+        <p>Rất mong sự hiện diện của bạn để ngày vui này thêm phần trọn vẹn.</p>
+
+        <div class="response-buttons">
+            <button class="agree" onclick="handleResponse('Đồng ý')">Đồng ý đi</button>
+            <button class="disagree" onclick="handleResponse('Không đồng ý')">Không đồng ý đi</button>
+            <button class="undecided" onclick="handleResponse('Chưa trả lời được')">Chưa trả lời được</button>
+        </div>
+
+        <div class="footer">
+            <p>Trân trọng,<br>Quang</p>
+        </div>
+    </div>
+</body>
+</html>
