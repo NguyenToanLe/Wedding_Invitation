@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Đám Cưới Quyên & Toàn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #d63384;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .event {
+            margin: 20px 0;
+        }
+        .event h2 {
+            color: #333;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+        .response-buttons {
+            margin-top: 20px;
+        }
+        .response-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .agree {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .disagree {
+            background-color: #dc3545;
+            color: #fff;
+        }
+        .undecided {
+            background-color: #ffc107;
+            color: #fff;
+        }
+    </style>
+    <script>
+        function handleResponse(response) {
+            // Extract guest name dynamically from the HTML
+            const guestNameElement = document.querySelector('p b');
+            const guestName = guestNameElement ? guestNameElement.textContent : "Unknown";
+
+            fetch("https://script.google.com/macros/s/AKfycbyp7tcnqPyjDs6aNqtyXSIP-E3XzmNoMe4ZkFepQpTY1vPSFD4BcGs6vAsuhAqN960GJA/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: guestName,
+                    response: response
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Cảm ơn bạn đã phản hồi! Chúng mình đã ghi nhận thông tin.");
+                } else {
+                    throw new Error(data.message || "Unknown error");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Xin lỗi, đã có lỗi xảy ra. Vui lòng thử lại sau.");
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Thiệp Mời Đám Cưới</h1>
+        <p>Thân gửi bạn <b>Thanh Lùn</b>,</p>
+        <p>Tụi mình vô cùng hân hạnh mời bạn đến chung vui trong ngày trọng đại của chúng mình.</p>
+
+        <div class="event">
+            <h2>Tại Hà Nội</h2>
+            <p><b>Thời gian:</b> Ngày 07.03.2025</p>
+            <p><b>Địa điểm:</b><a href="https://www.google.com/maps/place/Sao+mai+Plaza/@20.9836382,105.8646319,17z/data=!4m6!3m5!1s0x3135ad46823fbfff:0xcffdc4e88d19a846!8m2!3d20.9833796!4d105.8646362!16s%2Fg%2F11gxm7dkfv?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D">Sao Mai Plaza</a></p>
+        </div>
+
+        <div class="event">
+            <h2>Tại Sài Gòn</h2>
+            <p><b>Thời gian:</b> Ngày 19.03.2025</p>
+            <p><b>Địa điểm:</b><a href="https://www.google.com/maps/place/Trung+t%C3%A2m+h%E1%BB%99i+ngh%E1%BB%8B+-+ti%E1%BB%87c+c%C6%B0%E1%BB%9Bi+Pavillon+T%C3%A2n+S%C6%A1n+Nh%E1%BA%A5t/@10.8009932,106.6697337,17z/data=!3m1!4b1!4m6!3m5!1s0x31752928b68fbc3f:0xc58bea5686708420!8m2!3d10.8009909!4d106.670848!16s%2Fg%2F11f5jpgtry?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D">Trung tâm Hội Nghị - Tiệc Cưới Pavillon Tân Sơn Nhất</a></p>
+        </div>
+
+        <p>Sự hiện diện của (các) bạn sẽ là kỷ niệm khó quên với tụi mình.</p>
+
+        <!--<div class="response-buttons">
+            <button class="agree" onclick="handleResponse('Đồng ý')">Zusagen</button>
+            <button class="disagree" onclick="handleResponse('Không đồng ý')">Absagen</button>
+            <button class="undecided" onclick="handleResponse('Chưa trả lời được')">Unter Vorbehalt</button>
+        </div>-->
+
+        <div class="footer">
+            <p>Love,<br>Quyên & Toàn</p>
+        </div>
+    </div>
+</body>
+</html>
